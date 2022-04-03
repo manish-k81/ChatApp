@@ -7,10 +7,13 @@ const io = require('socket.io')(server,{
 })
 
 io.on('connection', socket =>{
+    console.log("1")
     console.log('connection made successfully')
     socket.on('message',payload => {
         console.log('Message received on server: ', payload)
+        // console.log("7")
         io.emit('message',payload)
+        // console.log("8")
     })
 })
 

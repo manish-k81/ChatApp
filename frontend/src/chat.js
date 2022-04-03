@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import io from 'socket.io-client'
 
 const socket = io('http://localhost:7000')
-// const userName = 'User '+parseInt(Math.random()*10)
 
 function Chat(){
     const [ message, setMessage ] = useState('')
@@ -11,16 +10,19 @@ function Chat(){
     const[ chat, setChat ] = useState([])
 
     useEffect(()=>{
+      // console.log("5")
         socket.on('message',payload=>{
             setChat([...chat,payload])
+            // console.log("6")
         })
     })
     function sendMessage(e){
         e.preventDefault()
+        // console.log("3")
         socket.emit('message',{message,name})
-        // console.log(message)
-        // console.log(name)
         setMessage('')
+        setName('')
+        // console.log("4")
     }
     return(
         <div className="App">
